@@ -27,6 +27,7 @@ import (
 type TxnHeaderOptsProvider func() []fab.TxnHeaderOpt
 
 //EndorsementHandler for handling endorse transactions
+//Try to set external txid
 type EndorsementHandler struct {
 	next               Handler
 	headerOptsProvider TxnHeaderOptsProvider
