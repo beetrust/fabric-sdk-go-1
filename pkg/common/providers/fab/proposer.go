@@ -21,6 +21,8 @@ type ProposalProcessor interface {
 type TxnHeaderOptions struct {
 	Nonce   []byte
 	Creator []byte
+	// adding txid attribute to generate txid
+	Txid    []byte
 }
 
 // TxnHeaderOpt is a Transaction Header option
@@ -30,6 +32,13 @@ type TxnHeaderOpt func(*TxnHeaderOptions)
 func WithNonce(nonce []byte) TxnHeaderOpt {
 	return func(options *TxnHeaderOptions) {
 		options.Nonce = nonce
+	}
+}
+
+//WithTxid specifies the number to use when creating the Transaction Header
+func WithTxid(txid []byte) TxnHeaderOpt {
+	return func(options *TxnHeaderOptions) {
+		options.Txid = txid
 	}
 }
 

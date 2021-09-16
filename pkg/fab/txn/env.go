@@ -59,6 +59,8 @@ func NewHeader(ctx contextApi.Client, channelID string, opts ...fab.TxnHeaderOpt
 		opt(&options)
 	}
 
+	txid := options.Txid
+	var id string
 	nonce := options.Nonce
 	if nonce == nil {
 		// generate a random nonce
@@ -78,15 +80,20 @@ func NewHeader(ctx contextApi.Client, channelID string, opts ...fab.TxnHeaderOpt
 		}
 	}
 
-	ho := cryptosuite.GetSHA256Opts() // TODO: make configurable
-	h, err := ctx.CryptoSuite().GetHash(ho)
-	if err != nil {
-		return nil, errors.WithMessage(err, "hash function creation failed")
-	}
+	if txid == nil {
+		ho := cryptosuite.GetSHA256Opts() // TODO: make configurable
+		h, err := ctx.CryptoSuite().GetHash(ho)
+		if err != nil {
+			return nil, errors.WithMessage(err, "hash function creation failed")
+		}
 
-	id, err := computeTxnID(nonce, creator, h)
-	if err != nil {
-		return nil, errors.WithMessage(err, "txn ID computation failed")
+		id, err = computeTxnID(nonce, creator, h)
+		if err != nil {
+			return nil, errors.WithMessage(err, "txn ID computation failed")
+		}
+
+	}else{
+		id = string(txid)
 	}
 
 	txnID := TransactionHeader{
