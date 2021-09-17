@@ -27,9 +27,9 @@ type TxnHeaderOptions struct {
 type TxnHeaderOpt func(*TxnHeaderOptions)
 
 // WithNonce specifies the nonce to use when creating the Transaction Header
-func WithNonce(nonce []byte) TxnHeaderOpt {
+func WithNonce(Nonce []byte) TxnHeaderOpt {
 	return func(options *TxnHeaderOptions) {
-		options.Nonce = nonce
+		options.Nonce = Nonce
 	}
 }
 

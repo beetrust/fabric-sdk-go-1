@@ -34,7 +34,6 @@ type EndorsementHandler struct {
 
 //Handle for endorsing transactions
 func (e *EndorsementHandler) Handle(requestContext *RequestContext, clientContext *ClientContext) {
-
 	if len(requestContext.Opts.Targets) == 0 {
 		requestContext.Error = status.New(status.ClientStatus, status.NoPeersFound.ToInt32(), "targets were not provided", nil)
 		return
@@ -44,6 +43,12 @@ func (e *EndorsementHandler) Handle(requestContext *RequestContext, clientContex
 	var TxnHeaderOpts []fab.TxnHeaderOpt
 	if e.headerOptsProvider != nil {
 		TxnHeaderOpts = e.headerOptsProvider()
+	}
+
+	//get Nonce
+	if requestContext.Opts.Nonce != nil {
+		TxnHeaderOpts = append(TxnHeaderOpts,fab.WithNonce(requestContext.Opts.Nonce))
+
 	}
 
 	transactionProposalResponses, proposal, err := createAndSendTransactionProposal(

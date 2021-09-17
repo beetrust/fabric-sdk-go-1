@@ -32,6 +32,7 @@ type Opts struct {
 	Timeouts      map[fab.TimeoutType]time.Duration
 	ParentContext reqContext.Context //parent grpc context
 	CCFilter      CCFilter
+	Nonce         []byte
 }
 
 // Request contains the parameters to execute transaction

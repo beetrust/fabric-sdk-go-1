@@ -8,6 +8,7 @@ package txn
 
 import (
 	"encoding/hex"
+	"github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/common/crypto"
 	"hash"
 	"time"
 
@@ -17,7 +18,6 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/common/crypto"
 	contextApi "github.com/hyperledger/fabric-sdk-go/pkg/common/providers/context"
 	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/fab"
 	"github.com/hyperledger/fabric-sdk-go/pkg/core/cryptosuite"
@@ -68,6 +68,11 @@ func NewHeader(ctx contextApi.Client, channelID string, opts ...fab.TxnHeaderOpt
 			return nil, errors.WithMessage(err, "nonce creation failed")
 		}
 	}
+
+	//if nonce == nil {
+	//	err := errors.New("HELLO")
+	//	return nil, errors.WithMessage(err,"nonce creation failed")
+	//}
 
 	creator := options.Creator
 	if creator == nil {
