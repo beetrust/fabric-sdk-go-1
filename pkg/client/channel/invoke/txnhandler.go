@@ -47,6 +47,11 @@ func (e *EndorsementHandler) Handle(requestContext *RequestContext, clientContex
 		TxnHeaderOpts = e.headerOptsProvider()
 	}
 
+	if requestContext.Opts.TxId != nil{
+		TxnHeaderOpts = append(TxnHeaderOpts,fab.WithTxid(requestContext.Opts.TxId))
+	}
+
+
 	transactionProposalResponses, proposal, err := createAndSendTransactionProposal(
 		clientContext.Transactor,
 		&requestContext.Request,

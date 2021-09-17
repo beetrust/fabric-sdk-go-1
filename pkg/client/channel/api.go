@@ -29,6 +29,7 @@ type requestOptions struct {
 	Timeouts      map[fab.TimeoutType]time.Duration //timeout options for channel client operations
 	ParentContext reqContext.Context                //parent grpc context for channel client operations (query, execute, invokehandler)
 	CCFilter      invoke.CCFilter
+	TxId 		  []byte
 }
 
 // RequestOption func for each Opts argument
@@ -61,6 +62,15 @@ type Response struct {
 	TxValidationCode pb.TxValidationCode
 	ChaincodeStatus  int32
 	Payload          []byte
+}
+
+//WithTargets allows overriding of the target peers for the request
+func WithtxId(TxId []byte) RequestOption {
+	return func(ctx context.Client, o *requestOptions) error {
+
+		o.TxId = TxId
+		return nil
+	}
 }
 
 //WithTargets allows overriding of the target peers for the request

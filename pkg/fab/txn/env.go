@@ -59,7 +59,7 @@ func NewHeader(ctx contextApi.Client, channelID string, opts ...fab.TxnHeaderOpt
 		opt(&options)
 	}
 
-	txid := options.Txid
+	txId := options.Txid
 	var id string
 	nonce := options.Nonce
 	if nonce == nil {
@@ -80,7 +80,7 @@ func NewHeader(ctx contextApi.Client, channelID string, opts ...fab.TxnHeaderOpt
 		}
 	}
 
-	if txid == nil {
+	if txId == nil {
 		ho := cryptosuite.GetSHA256Opts() // TODO: make configurable
 		h, err := ctx.CryptoSuite().GetHash(ho)
 		if err != nil {
@@ -93,7 +93,7 @@ func NewHeader(ctx contextApi.Client, channelID string, opts ...fab.TxnHeaderOpt
 		}
 
 	}else{
-		id = string(txid)
+		id = string(txId)
 	}
 
 	txnID := TransactionHeader{
