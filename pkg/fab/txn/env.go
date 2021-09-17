@@ -59,7 +59,7 @@ func NewHeader(ctx contextApi.Client, channelID string, opts ...fab.TxnHeaderOpt
 		opt(&options)
 	}
 
-	txId := options.Txid
+	txId := options.TxId
 	var id string
 	nonce := options.Nonce
 	if nonce == nil {
