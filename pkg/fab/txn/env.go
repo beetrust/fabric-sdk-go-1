@@ -80,6 +80,8 @@ func NewHeader(ctx contextApi.Client, channelID string, opts ...fab.TxnHeaderOpt
 		}
 	}
 
+	fmt.Printf("nonce的值为：%v\n",string(nonce))
+
 	ho := cryptosuite.GetSHA256Opts() // TODO: make configurable
 	h, err := ctx.CryptoSuite().GetHash(ho)
 	if err != nil {

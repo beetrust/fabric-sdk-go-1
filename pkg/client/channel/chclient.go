@@ -17,6 +17,7 @@ package channel
 
 import (
 	reqContext "context"
+	"fmt"
 	"time"
 
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel/invoke"
@@ -156,6 +157,9 @@ func (cc *Client) InvokeHandler(handler invoke.Handler, request Request, options
 	if err != nil {
 		return Response{}, err
 	}
+
+	// 打印解析后的请求上下文nonce
+	fmt.Printf("请求的上下文的nonce：%v\n",requestContext.Opts.Nonce)
 
 	invoker := retry.NewInvoker(
 		requestContext.RetryHandler,
