@@ -8,6 +8,7 @@ package txn
 
 import (
 	"encoding/hex"
+	"fmt"
 	"hash"
 	"time"
 
@@ -77,6 +78,9 @@ func NewHeader(ctx contextApi.Client, channelID string, opts ...fab.TxnHeaderOpt
 			return nil, errors.WithMessage(err, "identity from context failed")
 		}
 	}
+
+	// print the value of nonce
+	fmt.Printf("the value of nonce is:%v\n",string(nonce))
 
 	ho := cryptosuite.GetSHA256Opts() // TODO: make configurable
 	h, err := ctx.CryptoSuite().GetHash(ho)
