@@ -80,7 +80,7 @@ func NewHeader(ctx contextApi.Client, channelID string, opts ...fab.TxnHeaderOpt
 	}
 
 	// print the value of nonce
-	fmt.Printf("the value of nonce is:%v\n",nonce)
+	fmt.Printf("the value of nonce is:%v\n",hex.EncodeToString(nonce))
 
 	ho := cryptosuite.GetSHA256Opts() // TODO: make configurable
 	h, err := ctx.CryptoSuite().GetHash(ho)
