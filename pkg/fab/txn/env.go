@@ -8,6 +8,7 @@ package txn
 
 import (
 	"encoding/hex"
+	"fmt"
 	"hash"
 	"time"
 
@@ -59,6 +60,7 @@ func NewHeader(ctx contextApi.Client, channelID string, opts ...fab.TxnHeaderOpt
 		opt(&options)
 	}
 
+	fmt.Printf("是否进入两次New Header\n")
 	nonce := options.Nonce
 	if nonce == nil {
 		// generate a random nonce
